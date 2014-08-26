@@ -46,7 +46,7 @@ NSString * const AFAmazonS3ManagerErrorDomain = @"com.alamofire.networking.s3.er
 - (id)initWithAccessKeyID:(NSString *)accessKey
                    secret:(NSString *)secret
 {
-    self = [self init];
+  self = [self initWithBaseURL:nil];
     if (!self) {
         return nil;
     }
@@ -184,14 +184,15 @@ NSString * const AFAmazonS3ManagerErrorDomain = @"com.alamofire.networking.s3.er
     [self.operationQueue addOperation:requestOperation];
 }
 
-- (void)postObjectWithFile:(NSString *)path
+- (AFHTTPRequestOperation *)postObjectWithFile:(NSString *)path
            destinationPath:(NSString *)destinationPath
                 parameters:(NSDictionary *)parameters
                   progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
                    success:(void (^)(id responseObject))success
                    failure:(void (^)(NSError *error))failure
 {
-    [self setObjectWithMethod:@"POST" file:path destinationPath:destinationPath parameters:parameters progress:progress success:success failure:failure];
+    AFHTTPRequestOperation * requestOperation = [self setObjectWithMethod:@"POST" file:path destinationPath:destinationPath parameters:parameters progress:progress success:success failure:failure];
+    return requestOperation;
 }
 
 - (void)putObjectWithFile:(NSString *)path
@@ -211,7 +212,7 @@ NSString * const AFAmazonS3ManagerErrorDomain = @"com.alamofire.networking.s3.er
     [self enqueueS3RequestOperationWithMethod:@"DELETE" path:path parameters:nil success:success failure:failure];
 }
 
-- (void)setObjectWithMethod:(NSString *)method
+- (AFHTTPRequestOperation *)setObjectWithMethod:(NSString *)method
                        file:(NSString *)filePath
             destinationPath:(NSString *)destinationPath
                  parameters:(NSDictionary *)parameters
@@ -254,7 +255,10 @@ NSString * const AFAmazonS3ManagerErrorDomain = @"com.alamofire.networking.s3.er
         [requestOperation setUploadProgressBlock:progress];
 		
         [self.operationQueue addOperation:requestOperation];
+      
+        return requestOperation;
     }
+  return nil;
 }
 
 #pragma mark - NSKeyValueObserving

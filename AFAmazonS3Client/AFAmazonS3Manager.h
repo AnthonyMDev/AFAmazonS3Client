@@ -171,7 +171,7 @@
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes a single argument: the response object from the server.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the `NSError` object describing error that occurred.
  */
-- (void)postObjectWithFile:(NSString *)path
+- (AFHTTPRequestOperation *)postObjectWithFile:(NSString *)path
            destinationPath:(NSString *)destinationPath
                 parameters:(NSDictionary *)parameters
                   progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
