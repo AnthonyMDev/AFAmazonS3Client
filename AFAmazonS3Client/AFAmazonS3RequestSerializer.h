@@ -54,6 +54,15 @@
 @property (readonly, nonatomic, copy) NSURL *endpointURL;
 
 /**
+ *  Returns a URL for an object at the given path.
+ *
+ *  @param path The path to the object in the bucket.
+ *
+ *  @return An `NSURL` of a pre-signed query request URL to access the object through the REST API via URL.
+ */
+- (NSURL *)preSignedQueryURLWithPath:(NSString *)path;
+
+/**
  Sets the access key ID and secret, used to generate authorization headers.
  
  @param accessKey The Amazon S3 Access Key ID.
