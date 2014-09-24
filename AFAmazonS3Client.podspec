@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author       = { "Mattt Thompson" => "m@mattt.me" }
   s.author       = { "Anthony Miller" => "anthony.miller.lv@gmail.com" }
   s.source       = { :git => "https://github.com/AnthonyMDev/AFAmazonS3Client.git",
-                     :tag => "2.0.0-amdev" }
+                     :tag => "3.0.0-amdev" }
 
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
